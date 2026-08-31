@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore the teachers of Infant Jesus Public School, North Paravur.">
+  <meta name="theme-color" content="#8c1728">
+  <title>Our Teachers | Infant Jesus Public School</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="teachers-page">
+
+  <nav class="nav">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">IJ</span>
+      <span>Infant Jesus Public School</span>
+    </a>
+    <a class="nav-link" href="index.html">Home <span>↗</span></a>
+  </nav>
+
+  <main>
+    <section class="directory-hero">
+      <div class="directory-decoration deco-left"></div>
+      <div class="directory-decoration deco-right"></div>
+
+      <div class="directory-heading">
+        <p class="section-kicker">With gratitude</p>
+        <h1>Our Teachers</h1>
+        <p>Every teacher has a story worth remembering.</p>
+      </div>
+    </section>
+
+    <section class="directory-section">
+      <div class="directory-tools">
+        <label for="teacherSearch">Find a teacher</label>
+        <div class="search-box">
+          <span>⌕</span>
+          <input id="teacherSearch" type="search"
+                 placeholder="Search teacher or subject..." autocomplete="off">
+        </div>
+      </div>
+
+      <div class="teacher-grid" id="teacherGrid"></div>
+
+      <p class="no-results" id="noResults">No teacher found.</p>
+      <p class="teacher-count" id="teacherCount"></p>
+    </section>
+  </main>
+
+  <div class="profile-overlay" id="profileOverlay" aria-hidden="true">
+    <article class="profile-card" role="dialog" aria-modal="true" aria-labelledby="profileName">
+      <button class="close-button" id="closeProfile" aria-label="Close profile">×</button>
+
+      <div class="profile-photo" id="profilePhoto">
+        <div class="profile-placeholder">PHOTO</div>
+      </div>
+
+      <p class="profile-subject" id="profileSubject"></p>
+      <h2 id="profileName"></h2>
+
+      <div class="profile-section">
+        <h3>About</h3>
+        <p id="profileBio"></p>
+      </div>
+
+      <div class="profile-section">
+        <h3>What Students Say</h3>
+        <div id="profileOpinions"></div>
+      </div>
+    </article>
+  </div>
+
+  <footer>
+    <div class="footer-mark">IJ</div>
+    <p>Made with gratitude for our teachers</p>
+    <span>Teacher's Day 2026 · Infant Jesus Public School</span>
+  </footer>
+
+  <script>
+    /*
+      EDITABLE TEACHER DATA
+      ----------------------
+      Replace the placeholders below with the real details later.
+
+      photo example:
+      photo: "images/teacher-1.jpg"
+
+      You can keep all 130 teachers. The grid and profiles update automatically.
+    */
+
+    const teachers = [
+    { name: "Teacher 1", subject: "Subject 1", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 1 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 2", subject: "Subject 2", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 2 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 3", subject: "Subject 3", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 3 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 4", subject: "Subject 4", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 4 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 5", subject: "Subject 5", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 5 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 6", subject: "Subject 6", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 6 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 7", subject: "Subject 7", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 7 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 8", subject: "Subject 8", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 8 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 9", subject: "Subject 9", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 9 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 10", subject: "Subject 10", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 10 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 11", subject: "Subject 11", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 11 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 12", subject: "Subject 12", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 12 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 13", subject: "Subject 13", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 13 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 14", subject: "Subject 14", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 14 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 15", subject: "Subject 15", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 15 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 16", subject: "Subject 16", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 16 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 17", subject: "Subject 17", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 17 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 18", subject: "Subject 18", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 18 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 19", subject: "Subject 19", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 19 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 20", subject: "Subject 20", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 20 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 21", subject: "Subject 21", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 21 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 22", subject: "Subject 22", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 22 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 23", subject: "Subject 23", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 23 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 24", subject: "Subject 24", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 24 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 25", subject: "Subject 25", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 25 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 26", subject: "Subject 26", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 26 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 27", subject: "Subject 27", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 27 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 28", subject: "Subject 28", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 28 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 29", subject: "Subject 29", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 29 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 30", subject: "Subject 30", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 30 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 31", subject: "Subject 31", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 31 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 32", subject: "Subject 32", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 32 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 33", subject: "Subject 33", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 33 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 34", subject: "Subject 34", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 34 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 35", subject: "Subject 35", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 35 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 36", subject: "Subject 36", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 36 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 37", subject: "Subject 37", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 37 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 38", subject: "Subject 38", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 38 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 39", subject: "Subject 39", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 39 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 40", subject: "Subject 40", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 40 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 41", subject: "Subject 41", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 41 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 42", subject: "Subject 42", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 42 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 43", subject: "Subject 43", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 43 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 44", subject: "Subject 44", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 44 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 45", subject: "Subject 45", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 45 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 46", subject: "Subject 46", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 46 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 47", subject: "Subject 47", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 47 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 48", subject: "Subject 48", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 48 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 49", subject: "Subject 49", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 49 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 50", subject: "Subject 50", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 50 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 51", subject: "Subject 51", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 51 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 52", subject: "Subject 52", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 52 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 53", subject: "Subject 53", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 53 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 54", subject: "Subject 54", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 54 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 55", subject: "Subject 55", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 55 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 56", subject: "Subject 56", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 56 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 57", subject: "Subject 57", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 57 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 58", subject: "Subject 58", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 58 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 59", subject: "Subject 59", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 59 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 60", subject: "Subject 60", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 60 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 61", subject: "Subject 61", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 61 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 62", subject: "Subject 62", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 62 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 63", subject: "Subject 63", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 63 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 64", subject: "Subject 64", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 64 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 65", subject: "Subject 65", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 65 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 66", subject: "Subject 66", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 66 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 67", subject: "Subject 67", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 67 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 68", subject: "Subject 68", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 68 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 69", subject: "Subject 69", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 69 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 70", subject: "Subject 70", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 70 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 71", subject: "Subject 71", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 71 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 72", subject: "Subject 72", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 72 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 73", subject: "Subject 73", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 73 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 74", subject: "Subject 74", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 74 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 75", subject: "Subject 75", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 75 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 76", subject: "Subject 76", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 76 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 77", subject: "Subject 77", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 77 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 78", subject: "Subject 78", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 78 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 79", subject: "Subject 79", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 79 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 80", subject: "Subject 80", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 80 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 81", subject: "Subject 81", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 81 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 82", subject: "Subject 82", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 82 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 83", subject: "Subject 83", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 83 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 84", subject: "Subject 84", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 84 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 85", subject: "Subject 85", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 85 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 86", subject: "Subject 86", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 86 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 87", subject: "Subject 87", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 87 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 88", subject: "Subject 88", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 88 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 89", subject: "Subject 89", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 89 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 90", subject: "Subject 90", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 90 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 91", subject: "Subject 91", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 91 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 92", subject: "Subject 92", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 92 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 93", subject: "Subject 93", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 93 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 94", subject: "Subject 94", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 94 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 95", subject: "Subject 95", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 95 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 96", subject: "Subject 96", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 96 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 97", subject: "Subject 97", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 97 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 98", subject: "Subject 98", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 98 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 99", subject: "Subject 99", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 99 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 100", subject: "Subject 100", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 100 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 101", subject: "Subject 101", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 101 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 102", subject: "Subject 102", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 102 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 103", subject: "Subject 103", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 103 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 104", subject: "Subject 104", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 104 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 105", subject: "Subject 105", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 105 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 106", subject: "Subject 106", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 106 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 107", subject: "Subject 107", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 107 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 108", subject: "Subject 108", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 108 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 109", subject: "Subject 109", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 109 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 110", subject: "Subject 110", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 110 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 111", subject: "Subject 111", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 111 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 112", subject: "Subject 112", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 112 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 113", subject: "Subject 113", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 113 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 114", subject: "Subject 114", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 114 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 115", subject: "Subject 115", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 115 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 116", subject: "Subject 116", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 116 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 117", subject: "Subject 117", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 117 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 118", subject: "Subject 118", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 118 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 119", subject: "Subject 119", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 119 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 120", subject: "Subject 120", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 120 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 121", subject: "Subject 121", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 121 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 122", subject: "Subject 122", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 122 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 123", subject: "Subject 123", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 123 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 124", subject: "Subject 124", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 124 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 125", subject: "Subject 125", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 125 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 126", subject: "Subject 126", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 126 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 127", subject: "Subject 127", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 127 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 128", subject: "Subject 128", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 128 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 129", subject: "Subject 129", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 129 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] },
+    { name: "Teacher 130", subject: "Subject 130", photo: "",
+        bio: "Add the 2–3 line biography for Teacher 130 here.",
+        opinions: ["Add an anonymous student appreciation here.", "Add another appreciation here."] }
+    ];
+
+    const grid = document.getElementById("teacherGrid");
+    const search = document.getElementById("teacherSearch");
+    const count = document.getElementById("teacherCount");
+    const noResults = document.getElementById("noResults");
+
+    const overlay = document.getElementById("profileOverlay");
+    const closeButton = document.getElementById("closeProfile");
+    const profilePhoto = document.getElementById("profilePhoto");
+    const profileName = document.getElementById("profileName");
+    const profileSubject = document.getElementById("profileSubject");
+    const profileBio = document.getElementById("profileBio");
+    const profileOpinions = document.getElementById("profileOpinions");
+
+    function safe(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderTeachers(list) {
+      grid.innerHTML = "";
+
+      list.forEach((teacher) => {
+        const index = teachers.indexOf(teacher) + 1;
+        const tile = document.createElement("button");
+        tile.className = "teacher-tile";
+        tile.setAttribute("aria-label", `View ${teacher.name}`);
+
+        const photoMarkup = teacher.photo
+          ? `<img src="${safe(teacher.photo)}" alt="${safe(teacher.name)}">`
+          : `<div class="tile-photo-placeholder"><span>PHOTO</span></div>`;
+
+        tile.innerHTML = `
+          <span class="tile-number">${String(index).padStart(2, "0")}</span>
+          <span class="tile-photo">${photoMarkup}</span>
+          <span class="tile-caption">
+            <strong>${safe(teacher.name)}</strong>
+            <small>${safe(teacher.subject)}</small>
+          </span>
+        `;
+
+        tile.addEventListener("click", () => openProfile(teacher));
+        grid.appendChild(tile);
+      });
+
+      count.textContent = `${list.length} of ${teachers.length} teachers`;
+      noResults.classList.toggle("visible", list.length === 0);
+    }
+
+    function openProfile(teacher) {
+      profileName.textContent = teacher.name;
+      profileSubject.textContent = teacher.subject;
+      profileBio.textContent = teacher.bio;
+
+      profilePhoto.innerHTML = teacher.photo
+        ? `<img src="${safe(teacher.photo)}" alt="${safe(teacher.name)}">`
+        : `<div class="profile-placeholder">PHOTO</div>`;
+
+      profileOpinions.innerHTML = teacher.opinions
+        .map(opinion => `<blockquote>“${safe(opinion)}”</blockquote>`)
+        .join("");
+
+      overlay.classList.add("active");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("no-scroll");
+      closeButton.focus();
+    }
+
+    function closeProfile() {
+      overlay.classList.remove("active");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("no-scroll");
+    }
+
+    search.addEventListener("input", () => {
+      const query = search.value.toLowerCase().trim();
+
+      const filtered = teachers.filter(teacher =>
+        teacher.name.toLowerCase().includes(query) ||
+        teacher.subject.toLowerCase().includes(query)
+      );
+
+      renderTeachers(filtered);
+    });
+
+    closeButton.addEventListener("click", closeProfile);
+
+    overlay.addEventListener("click", event => {
+      if (event.target === overlay) closeProfile();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && overlay.classList.contains("active")) {
+        closeProfile();
+      }
+    });
+
+    renderTeachers(teachers);
+  </script>
+</body>
+</html>
