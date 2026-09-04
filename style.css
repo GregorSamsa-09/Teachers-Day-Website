@@ -162,6 +162,32 @@ button, input { font: inherit; }
   transform: scaleX(1.06);
 }
 
+/*
+  MALAYALAM SIGNATURE TITLE
+  ---------------------------------------------------------
+  For വർണജാലം - italic, slanted signature style while maintaining aesthetics
+*/
+.malayalam-signature-title {
+  margin: 0;
+  color: var(--red);
+  font-family: "Noto Serif Malayalam", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(3.2rem, 12vw, 7.5rem);
+  line-height: .9;
+  text-transform: none;
+  letter-spacing: -.01em;
+  text-shadow: 0 2px 0 rgba(201,163,78,.12);
+  display: inline-block;
+  /* Italic + skew for signature-like appearance */
+  font-style: italic;
+  transform: skewY(-3deg) scaleX(1.04);
+}
+
+/* Prefer less slant on narrow screens */
+@media (max-width: 520px) {
+  .malayalam-signature-title { transform: skewY(-2deg) scaleX(1.02); }
+}
+
 /* Prefer less horizontal scale on narrow screens so it doesn't wrap awkwardly */
 @media (max-width: 520px) {
   .block-nine-title { transform: scaleX(1.03); }
