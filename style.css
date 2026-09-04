@@ -5,6 +5,15 @@
    3-color palette: deep red / warm white / gold
    ========================================================= */
 
+@font-face {
+  font-family: 'Bison';
+  src: url('/fonts/Bison-Bold.woff2') format('woff2'),
+       url('/fonts/Bison-Bold.woff') format('woff');
+  font-weight: 800 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --red: #a42222;
   --red-dark: #a42222;
@@ -105,6 +114,11 @@ button, input { font: inherit; }
   max-width: 900px;
   text-align: center;
   animation: reveal .9s ease both;
+  /* Use flex so the block title and surrounding elements stay perfectly centered */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .overline {
@@ -133,13 +147,19 @@ button, input { font: inherit; }
 .block-nine-title {
   margin: 0;
   color: var(--red);
-  font-family: "Roboto Slab", Rockwell, "Rockwell Extra Bold", Georgia, serif;
+  /* Prefer Bison if available, otherwise fall back to the strong slab display */
+  font-family: "Bison", "Roboto Slab", Rockwell, "Rockwell Extra Bold", Georgia, serif;
   font-weight: 900;
   font-size: clamp(3.55rem, 13.5vw, 8.8rem);
   line-height: .84;
-  letter-spacing: -.045em;
-  text-transform: uppercase;
+  /* Malayalam should keep its native casing; don't force uppercase */
+  text-transform: none;
+  /* Slight negative letter-spacing to tighten the Malayalam word appearance */
+  letter-spacing: -.02em;
   text-shadow: 0 2px 0 rgba(201,163,78,.12);
+  display: inline-block;
+  /* If Bison is not present, visually emulate its slightly elongated look */
+  transform: scaleX(1.05);
 }
 
 .hero-subtitle {
@@ -717,6 +737,8 @@ footer span { opacity: .75; }
 
   .block-nine-title {
     font-size: 4.05rem;
+    /* reduce the transform a bit on small screens so it doesn't overflow */
+    transform: scaleX(1.03);
   }
 
   .teacher-grid {
