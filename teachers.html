@@ -63,10 +63,6 @@
         <p id="profileBio"></p>
       </div>
 
-      <div class="profile-section">
-        <h3>What Students Say</h3>
-        <div id="profileOpinions"></div>
-      </div>
     </article>
   </div>
 
@@ -459,7 +455,6 @@
     const profileName = document.getElementById("profileName");
     const profileSubject = document.getElementById("profileSubject");
     const profileBio = document.getElementById("profileBio");
-    const profileOpinions = document.getElementById("profileOpinions");
 
     function safe(value) {
       return String(value)
@@ -508,10 +503,6 @@
       profilePhoto.innerHTML = teacher.photo
         ? `<img src="${safe(teacher.photo)}" alt="${safe(teacher.name)}">`
         : `<div class="profile-placeholder">PHOTO</div>`;
-
-      profileOpinions.innerHTML = teacher.opinions
-        .map(opinion => `<blockquote>"${safe(opinion)}"</blockquote>`)
-        .join("");
 
       overlay.classList.add("active");
       overlay.setAttribute("aria-hidden", "false");
