@@ -328,6 +328,14 @@
         bio: "Add the 2–3 line biography here." }
     ];
 
+    // If you added the image files to the repo with filenames matching the teacher names (e.g. "AKASH JOSE.jpg.jpeg"),
+    // auto-fill empty photo fields so the new images show up without editing every entry.
+    teachers.forEach(t => {
+      if (!t.photo || t.photo.trim() === "") {
+        t.photo = t.name + ".jpg.jpeg";
+      }
+    });
+
     const grid = document.getElementById("teacherGrid");
     const search = document.getElementById("teacherSearch");
     const count = document.getElementById("teacherCount");
