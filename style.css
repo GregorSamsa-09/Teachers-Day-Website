@@ -167,49 +167,132 @@ button, input { font: inherit; }
   ---------------------------------------------------------
   For വർണജാലം - italic, slanted signature style while maintaining aesthetics
 */
-```css
 .malayalam-signature-title {
   margin: 0;
-
-  /* Chalk color */
-  color: #f1eee3;
-
-  /* Handwritten font */
-  font-family: "Caveat", "Segoe Print", cursive;
-  font-weight: 600;
-
-  font-size: clamp(3.8rem, 14vw, 8rem);
-  line-height: 0.95;
-  letter-spacing: 0.02em;
-
+  color: var(--red);
+  font-family: "Noto Serif Malayalam", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(3.2rem, 12vw, 7.5rem);
+  line-height: .9;
+  text-transform: none;
+  letter-spacing: -.01em;
+  text-shadow: 0 2px 0 rgba(201,163,78,.12);
   display: inline-block;
-
-  /* Slightly imperfect handwritten angle */
-  transform: rotate(-2deg) skewX(-2deg);
-
-  /* CHALK EFFECT */
-  text-shadow:
-    0 0 1px rgba(255,255,255,0.9),
-    1px 0 1px rgba(255,255,255,0.35),
-    -1px 0 1px rgba(255,255,255,0.25),
-    0 1px 2px rgba(255,255,255,0.3),
-    0 0 4px rgba(255,255,255,0.12);
-
-  /* Slight chalk softness */
-  filter: blur(0.15px);
-
-  opacity: 0.92;
+  /* Italic + skew for signature-like appearance */
+  font-style: italic;
+  transform: skewY(0deg) scaleX(1.00);
 }
 
-/* Mobile */
+/* Prefer less slant on narrow screens */
+@media (max-width: 520px) 
+  
+}
+
+/* Prefer less horizontal scale on narrow screens so it doesn't wrap awkwardly */
 @media (max-width: 520px) {
-  .malayalam-signature-title {
-    font-size: clamp(3.5rem, 16vw, 6rem);
-    transform: rotate(-1.5deg) skewX(-1deg);
-  }
+  .block-nine-title { transform: scaleX(1.03); }
 }
-```
 
+.hero-subtitle {
+  width: min(600px, 100%);
+  margin: 30px auto 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 17px;
+  margin-top: 30px;
+  padding: 15px 21px;
+  border: 1px solid var(--red);
+  border-radius: 999px;
+  color: var(--white);
+  background: var(--red);
+  box-shadow: 0 12px 30px rgba(140,23,40,.12);
+  font-size: .76rem;
+  font-weight: 900;
+  letter-spacing: .05em;
+  transition: .25s ease;
+}
+
+.hero-cta b {
+  color: var(--gold);
+  font-size: 1.1rem;
+}
+
+.hero-cta:hover {
+  background: var(--red-dark);
+  transform: translateY(-2px);
+}
+
+.school-caption {
+  margin: 28px 0 0;
+  color: var(--red);
+  opacity: .55;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.abstract-art {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.art-one {
+  width: 330px;
+  height: 150px;
+  right: -90px;
+  top: 21%;
+  border: 1px solid var(--gold-line);
+  border-radius: 60% 40% 60% 40%;
+  transform: rotate(-23deg);
+}
+
+.art-two {
+  width: 210px;
+  height: 120px;
+  left: -60px;
+  top: 27%;
+  border: 1px solid rgba(140,23,40,.2);
+  border-radius: 50% 60% 40% 70%;
+  transform: rotate(25deg);
+}
+
+.art-three {
+  width: 150px;
+  height: 150px;
+  right: 15%;
+  bottom: 8%;
+  border-radius: 48% 52% 60% 40%;
+  background: rgba(201,163,78,.10);
+  transform: rotate(35deg);
+}
+
+.abstract-ring {
+  position: absolute;
+  z-index: -2;
+  border: 1px solid rgba(201,163,78,.25);
+  border-radius: 50%;
+}
+
+.ring-one {
+  width: 370px;
+  height: 370px;
+  left: -210px;
+  bottom: -200px;
+}
+
+.ring-two {
+  width: 270px;
+  height: 270px;
+  right: -150px;
+  bottom: -110px;
+}
 
 /* ================= CELEBRATION ================= */
 
