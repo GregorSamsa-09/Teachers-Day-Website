@@ -184,8 +184,8 @@ button, input { font: inherit; }
 }
 
 /* Prefer less slant on narrow screens */
-@media (max-width: 520px) {
-  .malayalam-signature-title { transform: skewY(-2deg) scaleX(1.02); }
+@media (max-width: 520px) 
+  
 }
 
 /* Prefer less horizontal scale on narrow screens so it doesn't wrap awkwardly */
