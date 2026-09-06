@@ -148,7 +148,7 @@ button, input { font: inherit; }
 .block-nine-title {
   margin: 0;
   color: var(--red);
-  font-family: "Bison", "Noto Serif Malayalam", "Roboto Slab", Rockwell, "Rockwell Extra Bold", Georgia, serif;
+  font-family: "Bison", "Noto Serif", "Roboto Slab", Rockwell, "Rockwell Extra Bold", Georgia, serif;
   font-weight: 900;
   font-size: clamp(3.55rem, 13.5vw, 8.8rem);
   line-height: .84;
@@ -159,7 +159,7 @@ button, input { font: inherit; }
   text-shadow: 0 2px 0 rgba(201,163,78,.12);
   display: inline-block;
   /* Slight elongation to emulate Bison's look when Bison isn't present */
-  transform: scaleX(1.06);
+  transform: scaleX(1.00);
 }
 
 /*
@@ -180,7 +180,7 @@ button, input { font: inherit; }
   display: inline-block;
   /* Italic + skew for signature-like appearance */
   font-style: italic;
-  transform: skewY(-3deg) scaleX(1.04);
+  transform: skewY(0deg) scaleX(1.00);
 }
 
 /* Prefer less slant on narrow screens */
